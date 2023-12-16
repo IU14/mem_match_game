@@ -11,49 +11,77 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const appTheme = AppTheme();
-    return MaterialApp(
-      title: 'Memory & Matching Game',
-      theme: appTheme.toThemeData(),
-    );
-  }
-}
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+    Widget playButton = Container(
+        child: Center(
+            child:
+                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+      ElevatedButton(
+          onPressed: () {
+            // Action to perform when Play button is pressed
+          },
+          child: Icon(
+            Icons.star,
+            color: appTheme.tertiaryColor,
+          )),
+    ])));
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Memory & Matching Game'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-              onPressed: () {
-                // Action to perform when Play button is pressed
-              },
-              child: const Text('Play'),
+    Column _buildButtonColumn(
+      Color color,
+      IconData icon,
+      String label,
+    ) {
+      return Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(icon, color: color),
+          Container(
+            margin: const EdgeInsets.only(top: 8),
+            child: Text(
+              label,
+              style: TextStyle(
+                fontSize: 12,
+                fontWeight: FontWeight.w400,
+                color: color,
+              ),
             ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                // Action to perform when Progress button is pressed
-              },
-              child: const Text('Progress'),
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                // Action to perform when Exit button is pressed
-              },
-              child: const Text('Exit'),
-            ),
-          ],
+          ),
+        ],
+      );
+    }
+
+    // setting the button colour
+    Color color = appTheme.primaryColor;
+
+    Widget otherButtons = Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        ElevatedButton(
+          onPressed: () {
+            // Action to perform when Progress button is pressed
+          },
+          child: _buildButtonColumn(color, Icons.addchart, 'Progress'),
         ),
-      ),
+        ElevatedButton(
+          onPressed: () {
+            // Action to perform when Progress button is pressed
+          },
+          child: _buildButtonColumn(color, Icons.logout, 'Exit'),
+        )
+      ],
+    );
+
+    return MaterialApp(
+      theme: appTheme.toThemeData(),
+      home: Scaffold(
+          appBar: AppBar(
+            title: const Text('Memory & Matching Game'),
+          ),
+          body: Column(children: [
+            playButton,
+            otherButtons,
+          ])),
     );
   }
 }
