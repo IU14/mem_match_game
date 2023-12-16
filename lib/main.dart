@@ -5,9 +5,11 @@ void main() {
   runApp(const MyApp());
 }
 
+//main class for the app, has the home page within it
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  // building the home page buttons
   @override
   Widget build(BuildContext context) {
     const appTheme = AppTheme();
@@ -72,6 +74,7 @@ class MyApp extends StatelessWidget {
       ],
     );
 
+    //building the app page
     return MaterialApp(
       theme: appTheme.toThemeData(),
       home: Scaffold(
