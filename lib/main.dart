@@ -1,35 +1,43 @@
 import 'package:flutter/material.dart';
-import 'AppTheme.dart';
+import 'package:flutter/services.dart';
+import 'package:json_theme/json_theme.dart';
+import 'dart:convert';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  final themeStr = await rootBundle.loadString('assets/appainter_theme.json');
+  final themeJson = jsonDecode(themeStr);
+  final theme = ThemeDecoder.decodeThemeData(themeJson)!;
+
+  runApp(MyApp(theme: theme));
 }
 
 //main class for the app, has the home page within it
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final ThemeData theme;
+
+  const MyApp({Key? key, required this.theme}) : super(key: key);
 
   // building the home page buttons
   @override
   Widget build(BuildContext context) {
-    const appTheme = AppTheme();
-
     Widget playButton = Container(
         child: Center(
-            child:
-                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-      ElevatedButton(
-          onPressed: () {
-            // Action to perform when Play button is pressed
-          },
-          child: Icon(
-            Icons.star,
-            color: appTheme.tertiaryColor,
-          )),
-    ])));
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+          ElevatedButton(
+              onPressed: () {
+                // Action to perform when Play button is pressed
+              },
+              child: const Icon(
+                Icons.star,
+              )),
+        ])));
 
-    Column _buildButtonColumn(
-      Color color,
+    Column buildButtonColumn(
       IconData icon,
       String label,
     ) {
@@ -37,24 +45,20 @@ class MyApp extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(icon, color: color),
+          Icon(icon),
           Container(
             margin: const EdgeInsets.only(top: 8),
             child: Text(
               label,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w400,
-                color: color,
               ),
             ),
           ),
         ],
       );
     }
-
-    // setting the button colour
-    Color color = appTheme.primaryColor;
 
     Widget otherButtons = Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -63,20 +67,20 @@ class MyApp extends StatelessWidget {
           onPressed: () {
             // Action to perform when Progress button is pressed
           },
-          child: _buildButtonColumn(color, Icons.addchart, 'Progress'),
+          child: buildButtonColumn(Icons.addchart, 'Progress'),
         ),
         ElevatedButton(
           onPressed: () {
             // Action to perform when Progress button is pressed
           },
-          child: _buildButtonColumn(color, Icons.logout, 'Exit'),
+          child: buildButtonColumn(Icons.logout, 'Exit'),
         )
       ],
     );
 
     //building the app page
     return MaterialApp(
-      theme: appTheme.toThemeData(),
+      theme: theme,
       home: Scaffold(
           appBar: AppBar(
             title: const Text('Memory & Matching Game'),

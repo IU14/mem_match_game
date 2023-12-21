@@ -13,7 +13,8 @@ import 'package:mem_match_game/main.dart';
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+    var theme;
+    await tester.pumpWidget(MyApp(theme: theme));
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);
