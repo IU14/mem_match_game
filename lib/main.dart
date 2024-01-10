@@ -22,12 +22,11 @@ class MyApp extends StatelessWidget {
   // building the home page buttons
   @override
   Widget build(BuildContext context) {
-    Widget playButton = Container(
-        child: Center(
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
+    Widget playButton = Center(
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
           ElevatedButton(
               onPressed: () {
                 // Action to perform when Play button is pressed
@@ -35,7 +34,7 @@ class MyApp extends StatelessWidget {
               child: const Icon(
                 Icons.star,
               )),
-        ])));
+        ]));
 
     Column buildButtonColumn(
       IconData icon,
