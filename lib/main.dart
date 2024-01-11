@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:json_theme/json_theme.dart';
 import 'dart:convert';
 
@@ -13,38 +13,23 @@ void main() async {
   runApp(MyApp(theme: theme));
 }
 
-//main class for the app, has the home page within it
 class MyApp extends StatelessWidget {
   final ThemeData theme;
 
   const MyApp({Key? key, required this.theme}) : super(key: key);
 
-  // building the home page buttons
   @override
   Widget build(BuildContext context) {
-    Widget playButton = Center(
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-          ElevatedButton(
-              onPressed: () {
-                // Action to perform when Play button is pressed
-              },
-              child: const Icon(
-                Icons.star,
-              )),
-        ]));
-
     Column buildButtonColumn(
-      IconData icon,
-      String label,
-    ) {
+        IconData icon, String label, VoidCallback onPressed) {
       return Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(icon),
+          ElevatedButton(
+            onPressed: onPressed,
+            child: Icon(icon),
+          ),
           Container(
             margin: const EdgeInsets.only(top: 8),
             child: Text(
@@ -59,35 +44,48 @@ class MyApp extends StatelessWidget {
       );
     }
 
-    Widget otherButtons = Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        ElevatedButton(
-          onPressed: () {
-            // Action to perform when Progress button is pressed
-          },
-          child: buildButtonColumn(Icons.addchart, 'Progress'),
-        ),
-        ElevatedButton(
-          onPressed: () {
-            // Action to perform when Progress button is pressed
-          },
-          child: buildButtonColumn(Icons.logout, 'Exit'),
-        )
-      ],
-    );
-
-    //building the app page
     return MaterialApp(
       theme: theme,
       home: Scaffold(
-          appBar: AppBar(
-            title: const Text('Memory & Matching Game'),
+        appBar: AppBar(
+          title: const Text('Memory & Matching Game'),
+        ),
+        body: Center(
+          child: ElevatedButton(
+            onPressed: () {
+              // Action to perform when Play button is pressed
+            },
+            child: const Icon(
+              Icons.star,
+              size: 100,
+            ),
           ),
-          body: Column(children: [
-            playButton,
-            otherButtons,
-          ])),
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.addchart),
+              label: 'Progress',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.logout),
+              label: 'Exit',
+            ),
+          ],
+          currentIndex: 0,
+          onTap: (index) {
+            // Handle navigation to different pages using a switch statement
+            switch (index) {
+              case 0:
+                // Progress button pressed
+                break;
+              case 1:
+                // Exit button pressed
+                break;
+            }
+          },
+        ),
+      ),
     );
   }
 }
