@@ -5,8 +5,9 @@ import 'package:flutter/material.dart';
 class MatchGame extends StatelessWidget {
   final ThemeData theme;
 
-  const MatchGame({Key? key, required this.theme}) : super(key: key);
+  const MatchGame({super.key, required this.theme});
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -20,19 +21,19 @@ class MatchGame extends StatelessWidget {
               onPressed: () {
                 // TODO: Navigate to scene 1
               },
-              child: Text('Scene 1'),
+              child: const Text('Scene 1'),
             ),
             ElevatedButton(
               onPressed: () {
                 // TODO: Navigate to scene 2
               },
-              child: Text('Scene 2'),
+              child: const Text('Scene 2'),
             ),
             ElevatedButton(
               onPressed: () {
                 // TODO: Navigate to scene 3
               },
-              child: Text('Scene 3'),
+              child: const Text('Scene 3'),
             ),
           ],
         ),

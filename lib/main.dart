@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart' show rootBundle;
+import 'package:flutter/services.dart' show SystemNavigator, rootBundle;
 import 'package:json_theme/json_theme.dart';
 import 'dart:convert';
 
+//imports that connet to the other dart files in the lib folder
 import 'package:mem_match_game/matchGame.dart';
+import 'package:mem_match_game/progress.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -66,28 +68,39 @@ class MyApp extends StatelessWidget {
             ),
           ],
         ),
-        bottomNavigationBar: BottomNavigationBar(
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.addchart),
-              label: 'Progress',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.logout),
-              label: 'Exit',
-            ),
-          ],
-          currentIndex: 0,
-          onTap: (index) {
-            // Handle navigation to different pages using a switch statement
-            switch (index) {
-              case 0:
-                // Progress button pressed
-                break;
-              case 1:
-                // Exit button pressed
-                break;
-            }
+        // builds navigation bar at the bottom of the screen
+        bottomNavigationBar: Builder(
+          builder: (BuildContext context) {
+            return BottomNavigationBar(
+              items: const [
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.addchart),
+                  label: 'Progress',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.logout),
+                  label: 'Exit',
+                ),
+              ],
+              currentIndex: 0,
+              onTap: (index) {
+                // Handles navigation to different pages using a switch statement
+                switch (index) {
+                  case 0:
+                    // Progress button pressed - opens progress page
+
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ProgressPage(theme: theme)));
+                    break;
+                  case 1:
+                    // Exit button pressed - closes app
+                    SystemNavigator.pop();
+                    break;
+                }
+              },
+            );
           },
         ),
       ),
