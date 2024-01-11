@@ -55,9 +55,10 @@ class MyApp extends StatelessWidget {
             onPressed: () {
               // Action to perform when Play button is pressed
             },
-            child: const Icon(
-              Icons.star,
-              size: 100,
+            child: const Image(
+              image: AssetImage('assets/images/play_button.png'),
+              width: 200,
+              height: 200,
             ),
           ),
         ),
