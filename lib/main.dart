@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
             Center(
               child: Builder(
                 builder: (BuildContext context) {
-                  return ElevatedButton(
+                  return TextButton(
                     onPressed: () {
                       // Opens Matching Game screen when play button is pressed
                       Navigator.push(
