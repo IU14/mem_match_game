@@ -3,6 +3,8 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:json_theme/json_theme.dart';
 import 'dart:convert';
 
+import 'package:mem_match_game/matchGame.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -13,54 +15,56 @@ void main() async {
   runApp(MyApp(theme: theme));
 }
 
+//builds home screen
 class MyApp extends StatelessWidget {
   final ThemeData theme;
 
-  const MyApp({Key? key, required this.theme}) : super(key: key);
+  const MyApp({super.key, required this.theme});
 
   @override
   Widget build(BuildContext context) {
-    Column buildButtonColumn(
-        IconData icon, String label, VoidCallback onPressed) {
-      return Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          ElevatedButton(
-            onPressed: onPressed,
-            child: Icon(icon),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 8),
-            child: Text(
-              label,
-              style: const TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-          ),
-        ],
-      );
-    }
-
     return MaterialApp(
       theme: theme,
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Memory & Matching Game'),
-        ),
-        body: Center(
-          child: ElevatedButton(
-            onPressed: () {
-              // Action to perform when Play button is pressed
-            },
-            child: const Image(
-              image: AssetImage('assets/images/play_button.png'),
-              width: 200,
-              height: 200,
-            ),
+          title: const Text(
+            'Memory & Matching Game',
+            textAlign: TextAlign.center,
           ),
+        ),
+        body: Stack(
+          fit: StackFit.expand,
+          children: [
+            //background image
+            Positioned.fill(
+                child: Image.asset(
+              'assets/images/home_background.png',
+              fit: BoxFit.cover,
+            )),
+            //play button
+            Center(
+              child: Builder(
+                builder: (BuildContext context) {
+                  return ElevatedButton(
+                    onPressed: () {
+                      // Opens Matching Game screen when play button is pressed
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MatchGame(theme: theme),
+                        ),
+                      );
+                    },
+                    child: const Image(
+                      image: AssetImage('assets/images/play_button.png'),
+                      width: 200,
+                      height: 200,
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
         ),
         bottomNavigationBar: BottomNavigationBar(
           items: const [
