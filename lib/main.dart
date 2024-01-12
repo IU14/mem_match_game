@@ -88,7 +88,6 @@ class MyApp extends StatelessWidget {
                 switch (index) {
                   case 0:
                     // Progress button pressed - opens progress page
-
                     Navigator.push(
                         context,
                         MaterialPageRoute(
