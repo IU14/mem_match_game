@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show SystemNavigator, rootBundle;
 import 'package:json_theme/json_theme.dart';
 import 'dart:convert';
-import 'package:flame/flame.dart';
-import 'package:flame/game.dart';
-import 'package:flame/events.dart';
 
 //imports that connet to the other dart files in the lib folder
 import 'package:mem_match_game/matchGame.dart';

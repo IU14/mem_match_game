@@ -8,7 +8,7 @@ import 'package:mem_match_game/main.dart';
 class MatchGame extends StatelessWidget {
   final ThemeData theme;
 
-  const MatchGame({super.key, required this.theme});
+  MatchGame({Key? key, required this.theme}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,29 +17,151 @@ class MatchGame extends StatelessWidget {
         title: const Text('Where would you like to play?'),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-              onPressed: () {
-                // TODO: Navigate to scene 1
-              },
-              child: const Text('Scene 1'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                // TODO: Navigate to scene 2
-              },
-              child: const Text('Scene 2'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                // TODO: Navigate to scene 3
-              },
-              child: const Text('Scene 3'),
-            ),
-          ],
+        child: Container(
+          color: Colors.yellow[100],
+          padding: const EdgeInsets.all(14.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextButton(
+                onPressed: () {
+                  navigateToGameScreen(context,
+                      Image.asset('assets/images/scenes/farm_scene.jpg'));
+                },
+                child: const Image(
+                  image: AssetImage('assets/images/farm_scene_picker.jpg'),
+                  width: 250,
+                  height: 450,
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  navigateToGameScreen(context,
+                      Image.asset('assets/images/scenes/beach_scene.jpg'));
+                },
+                child: const Image(
+                  image: AssetImage('assets/images/beach_scene_picker.jpg'),
+                  width: 250,
+                  height: 450,
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  navigateToGameScreen(context,
+                      Image.asset('assets/images/scenes/town_scene.jpg'));
+                },
+                child: const Image(
+                  image: AssetImage('assets/images/town_scene_picker.jpg'),
+                  width: 250,
+                  height: 450,
+                ),
+              ),
+            ],
+          ),
         ),
+      ),
+      bottomNavigationBar: Builder(
+        builder: (BuildContext context) {
+          return BottomNavigationBar(
+            items: const [
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                label: 'Back to Home',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.logout),
+                label: 'Exit',
+              ),
+            ],
+            currentIndex: 0,
+            onTap: (index) {
+              switch (index) {
+                case 0:
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MyApp(theme: theme),
+                    ),
+                  );
+                  break;
+                case 1:
+                  SystemNavigator.pop();
+                  break;
+              }
+            },
+          );
+        },
+      ),
+    );
+  }
+}
+
+void navigateToGameScreen(BuildContext context, Image selectedScene) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => MatchScreen(selectedScene: selectedScene),
+    ),
+  );
+}
+
+class MatchScreen extends StatefulWidget {
+  final Image selectedScene;
+
+  MatchScreen({Key? key, required this.selectedScene}) : super(key: key);
+
+  @override
+  _MatchScreenState createState() => _MatchScreenState();
+}
+
+class _MatchScreenState extends State<MatchScreen> {
+  late ThisMatchGame game;
+
+  @override
+  void initState() {
+    super.initState();
+    game = ThisMatchGame(selectedScene: widget.selectedScene);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Find the matching object!'),
+      ),
+      body: Center(
+        child: Container(
+            color: Colors.yellow[100],
+            padding: const EdgeInsets.all(14.0),
+            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Column(
+                // shows object to find and score
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Image.asset(
+                    'assets/images/objects/farm/cow.jpg', // TO DO: amend to take random object from the selected scene
+                    width: 100,
+                    height: 100,
+                  ),
+                  Text(
+                      'Score: ${game.score}') //TO DO: show score in a more interesting way
+                ],
+              ),
+              Column(
+                // displays selects scene
+                children: [
+                  widget.selectedScene,
+                  Container(
+                    constraints:
+                        const BoxConstraints(maxWidth: 250, maxHeight: 450),
+                  ),
+                ],
+              ),
+            ]
+                // TO DO: change to selected scene
+                )
+            // scene and object boxes here
+            ),
       ),
     );
   }
@@ -55,10 +177,9 @@ class ThisMatchGame {
   int score = 0;
 
   List<String> scenes = ['farm_scene.png', 'beach_scene.png', 'town_scene.png'];
-  String selectedScene;
+  Image selectedScene;
 
-  String currentScene = '';
-  String currentObject = '';
+  Image? currentScene;
 
   ThisMatchGame({required this.selectedScene}) : super() {
     startNewRound();
@@ -69,7 +190,11 @@ class ThisMatchGame {
     currentObject = objectToFind();
   }
 
+  // Rest of the code...
+  String currentObject = '';
+
   String objectToFind() {
+    // TO DO: Logic to select a random object from the current scen
     return 'object1.png';
   }
 
