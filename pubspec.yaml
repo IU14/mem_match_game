@@ -32,4 +32,6 @@ flutter:
     - assets/appainter_theme.json
     - assets/images/
     - assets/images/objects/farm/
+    - assets/images/objects/beach/
+    - assets/images/objects/town/
     - assets/images/scenes/

@@ -25,8 +25,13 @@ class MatchGame extends StatelessWidget {
             children: [
               TextButton(
                 onPressed: () {
-                  navigateToGameScreen(context,
-                      Image.asset('assets/images/scenes/farm_scene.jpg'));
+                  navigateToGameScreen(
+                      context,
+                      Image.asset(
+                        'assets/images/scenes/farm_scene.jpg',
+                        width: 550,
+                        height: 350,
+                      ));
                 },
                 child: const Image(
                   image: AssetImage('assets/images/farm_scene_picker.jpg'),
@@ -36,8 +41,13 @@ class MatchGame extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () {
-                  navigateToGameScreen(context,
-                      Image.asset('assets/images/scenes/beach_scene.jpg'));
+                  navigateToGameScreen(
+                      context,
+                      Image.asset(
+                        'assets/images/scenes/beach_scene.jpg',
+                        width: 550,
+                        height: 350,
+                      ));
                 },
                 child: const Image(
                   image: AssetImage('assets/images/beach_scene_picker.jpg'),
@@ -47,8 +57,13 @@ class MatchGame extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () {
-                  navigateToGameScreen(context,
-                      Image.asset('assets/images/scenes/town_scene.jpg'));
+                  navigateToGameScreen(
+                      context,
+                      Image.asset(
+                        'assets/images/scenes/town_scene.jpg',
+                        width: 550,
+                        height: 350,
+                      ));
                 },
                 child: const Image(
                   image: AssetImage('assets/images/town_scene_picker.jpg'),
@@ -132,32 +147,35 @@ class _MatchScreenState extends State<MatchScreen> {
       body: Center(
         child: Container(
             color: Colors.yellow[100],
-            padding: const EdgeInsets.all(14.0),
-            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-              Column(
-                // shows object to find and score
-                crossAxisAlignment: CrossAxisAlignment.start,
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Image.asset(
-                    'assets/images/objects/farm/cow.jpg', // TO DO: amend to take random object from the selected scene
-                    width: 100,
-                    height: 100,
+                  Column(
+                    // shows object to find and score
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        'assets/images/objects/farm/cow.jpg', // TO DO: amend to take random object from the selected scene
+                        width: 100,
+                        height: 100,
+                      ),
+                      Text(
+                          'Score: ${game.score}') //TO DO: show score in a more interesting way
+                    ],
                   ),
-                  Text(
-                      'Score: ${game.score}') //TO DO: show score in a more interesting way
-                ],
-              ),
-              Column(
-                // displays selects scene
-                children: [
-                  widget.selectedScene,
-                  Container(
-                    constraints:
-                        const BoxConstraints(maxWidth: 250, maxHeight: 450),
+                  Column(
+                    // displays selects scene
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      widget.selectedScene,
+                      Container(
+                        constraints:
+                            const BoxConstraints(maxWidth: 250, maxHeight: 450),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            ]
+                ]
                 // TO DO: change to selected scene
                 )
             // scene and object boxes here
@@ -169,7 +187,7 @@ class _MatchScreenState extends State<MatchScreen> {
 
 mixin TapDetector {
   void onTap() {
-    print('Tap detected');
+    // TO DO: implement onTap
   }
 }
 
