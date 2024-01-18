@@ -1,9 +1,12 @@
 // ignore_for_file: file_names
 
+import 'dart:math';
+
 import 'package:flame/events.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mem_match_game/main.dart';
+import 'package:flutter/src/painting/image_provider.dart';
 
 class MatchGame extends StatelessWidget {
   final ThemeData theme;
@@ -138,6 +141,51 @@ class _MatchScreenState extends State<MatchScreen> {
     game = ThisMatchGame(selectedScene: widget.selectedScene);
   }
 
+// object lists for each scene
+  List farmObjects = [
+    'assets/images/objects/farm/cow.jpg',
+    'assets/images/objects/farm/farmDog.jpg',
+    'assets/images/objects/farm/pig.jpg',
+    'assets/images/objects/farm/farmer.jpg',
+    'assets/images/objects/farm/tractor.jpg',
+    'assets/images/objects/farm/redBarn.jpg',
+  ];
+
+  List townObjects = [
+    'assets/images/objects/town/clockTower.jpg',
+    'assets/images/objects/town/bus.jpg',
+    'assets/images/objects/town/dogWalker.jpg',
+    'assets/images/objects/town/policeOfficer.jpg',
+    'assets/images/objects/town/shopSign.jpg',
+    'assets/images/objects/town/weatherVane.jpg',
+  ];
+
+  List beachObjects = [
+    'assets/images/objects/beach/beachBall.jpg',
+    'assets/images/objects/beach/beachTowel.jpg',
+    'assets/images/objects/beach/bucket.jpg',
+    'assets/images/objects/beach/sailBoat.jpg',
+    'assets/images/objects/beach/seagull.jpg',
+    'assets/images/objects/beach/umbrella.jpg',
+  ];
+
+// method that selects a random object from the current scene
+  selectrdmobject() {
+    var rdmIndex = Random().nextInt(6);
+    String scenePath = (widget.selectedScene.image as AssetImage).assetName;
+
+    if (scenePath == 'assets/images/scenes/farm_scene.jpg') {
+      return farmObjects[rdmIndex];
+    } else if (scenePath == 'assets/images/scenes/town_scene.jpg') {
+      return townObjects[rdmIndex];
+    } else if (scenePath == 'assets/images/scenes/beach_scene.jpg') {
+      return beachObjects[rdmIndex];
+    } else {
+      //handle error - returns app icon
+      return 'assests/images/play_button.png';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -156,7 +204,7 @@ class _MatchScreenState extends State<MatchScreen> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Image.asset(
-                        'assets/images/objects/farm/cow.jpg', // TO DO: amend to take random object from the selected scene
+                        selectrdmobject(),
                         width: 100,
                         height: 100,
                       ),
