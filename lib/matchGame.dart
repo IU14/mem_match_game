@@ -224,7 +224,7 @@ class _MatchScreenState extends State<MatchScreen> {
                     ],
                   ),
                 ]
-                // TO DO: change to selected scene
+                // TO DO: add botton navigation bar (home, exit)
                 )
             // scene and object boxes here
             ),
