@@ -2,7 +2,7 @@
     <application
         android:label="mem_match_game"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/play_button">
         <activity
             android:name=".MainActivity"
             android:exported="true"

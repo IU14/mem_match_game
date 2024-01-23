@@ -6,7 +6,6 @@ import 'package:flame/events.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mem_match_game/main.dart';
-import 'package:flutter/src/painting/image_provider.dart';
 
 class MatchGame extends StatelessWidget {
   final ThemeData theme;
