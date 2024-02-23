@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:mem_match_game/main.dart';
 
 class ProgressPage extends StatelessWidget {
@@ -13,8 +15,22 @@ class ProgressPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Celebrate your progress!'),
       ),
-      body: const Center(
+      body: Center(
         // TO DO: Add the progress page information here
+        child: Container(
+            color: Colors.yellow[100],
+            padding: EdgeInsets.all(14.0),
+            child: const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // TO DO: Add the progress page information here
+                  Image(image: AssetImage('assets/images/play_button.png')),
+                  Flexible(
+                      child: Text(
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Suspendisse dictum ante eu sem rhoncus mattis. Sed sollicitudin feugiat erat quis dignissim. Sed eget ultricies sapien.Nullam dapibus dolor augue, sit amet efficitur nunc viverra sed. Nulla eget tristique leo. Sed rutrum ante at augue accumsan lacinia.Phasellus dapibus, ipsum sit amet ultrices posuere, lectus quam blandit mi, vel aliquam magna arcu tempus urna. Duis ultricies fringilla lacus at tincidunt.",
+                  )),
+                  Image(image: AssetImage('assets/images/play_button.png')),
+                ])),
       ),
       bottomNavigationBar: Builder(
         builder: (BuildContext context) {
