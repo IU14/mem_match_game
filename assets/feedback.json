@@ -1,0 +1,12 @@
+{
+    "FeedbackIncorrect": [
+        "Almost there, keep trying!",
+        "Not quite, try again!",
+        "Keep going, you're doing great!"
+    ],
+    "FeedbackCorrect": [
+        "Great work, you did it!",
+        "Spot on, you're doing great!",
+        "You got it right, good job!"
+    ]
+}
