@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:mem_match_game/main.dart';
 
 class ProgressPage extends StatelessWidget {
@@ -16,14 +14,12 @@ class ProgressPage extends StatelessWidget {
         title: const Text('Celebrate your progress!'),
       ),
       body: Center(
-        // TO DO: Add the progress page information here
         child: Container(
             color: Colors.yellow[100],
             padding: EdgeInsets.all(14.0),
             child: const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // TO DO: Add the progress page information here
                   Image(image: AssetImage('assets/images/play_button.png')),
                   Flexible(
                       child: Text(
