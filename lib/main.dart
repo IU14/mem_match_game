@@ -4,7 +4,7 @@ import 'package:json_theme/json_theme.dart';
 import 'dart:convert';
 
 //imports that connet to the other dart files in the lib folder
-import 'package:mem_match_game/matchGame.dart';
+import 'package:mem_match_game/matchGameScreen.dart';
 import 'package:mem_match_game/progress.dart';
 
 void main() async {
@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => MatchGame(theme: theme),
+                          builder: (context) => MatchGameScreen(theme: theme),
                         ),
                       );
                     },
