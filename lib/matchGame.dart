@@ -1,54 +1,91 @@
-import 'package:flame/game.dart';
-import 'package:flame/flame.dart';
-import 'components/scene.dart';
-import 'components/thisObject.dart';
+import 'package:flame/components.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:mem_match_game/main.dart';
 
-class MatchGame extends FlameGame {
+class MatchGame extends StatelessWidget {
+  final ThemeData theme;
+  final Image selectedScene;
+  final Image randomObject;
+
+  MatchGame(
+    this.selectedScene,
+    this.randomObject,
+    this.theme,
+  );
+
   @override
-  Future<void> onLoad() async {
-    await Flame.images.load(
-      'objects-sprite-0.png',
-    );
-    await Flame.images.load(
-      'objects-sprite-1.png',
-    );
-    await Flame.images.load(
-      'objects-sprite-2.png',
-    );
-    await Flame.images.load(
-      'objects-sprite-3.png',
-    );
-    await Flame.images.load(
-      'objects-sprite-4.png',
-    );
-    await Flame.images.load(
-      'objects-sprite-5.png',
-    );
-    await Flame.images.load(
-      'scene-sprite-0.png',
-    );
-    await Flame.images.load(
-      'scene-sprite-1.png',
-    );
-    await Flame.images.load(
-      'scene-sprite-2.png',
-    );
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: const Text('Find the matching object!'),
+        ),
+        body: Center(
+          child: Container(
+            color: Colors.yellow[100],
+            padding: const EdgeInsets.all(
+              8.0,
+            ),
+            //game logic in here
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: randomObject,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: 450,
+                            height: 250,
+                            child: selectedScene,
+                          )
+                        ]),
+                  ),
+                ]),
+          ),
+        ),
+        //bottom navigation bar
+        bottomNavigationBar: Builder(builder: (BuildContext context) {
+          return BottomNavigationBar(
+            items: const [
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                label: 'Back to Home',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.logout),
+                label: 'Exit',
+              ),
+            ],
+            currentIndex: 0,
+            onTap: (index) {
+              switch (index) {
+                case 0:
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MyApp(theme: theme),
+                    ),
+                  );
+                  break;
+                case 1:
+                  SystemNavigator.pop();
+                  break;
+              }
+            },
+          );
+        }));
   }
-
-// global variables
-  static const double objectWidth = 200;
-  static const double objectHeight = 200;
-  static const double sceneWidth = 550;
-  static const double sceneHeight = 350;
-  static final Vector2 objectSize = Vector2(objectWidth, objectHeight);
-  static final Vector2 sceneSize = Vector2(sceneWidth, sceneHeight);
-
-  final scene = Scene();
-  final object = ThisObject();
-
-  // game constructor
-}
-
-MatchGame initializeGame() {
-  return MatchGame();
 }
